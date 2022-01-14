@@ -15,7 +15,12 @@
 		55043ABD27911D4B009BB5B7 /* SignUpDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043ABC27911D4B009BB5B7 /* SignUpDemoTests.swift */; };
 		55043AC727911D4B009BB5B7 /* SignUpDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AC627911D4B009BB5B7 /* SignUpDemoUITests.swift */; };
 		55043AC927911D4B009BB5B7 /* SignUpDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AC827911D4B009BB5B7 /* SignUpDemoUITestsLaunchTests.swift */; };
-		55043AD72791220B009BB5B7 /* LoginFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AD62791220B009BB5B7 /* LoginFieldValidation.swift */; };
+		55043ADC2791A553009BB5B7 /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043ADB2791A553009BB5B7 /* FieldView.swift */; };
+		55043ADE2791A99B009BB5B7 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043ADD2791A99B009BB5B7 /* NetworkLayer.swift */; };
+		55043AE32791AEE7009BB5B7 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AE22791AEE7009BB5B7 /* UIView+Extension.swift */; };
+		55043AE72791B0C7009BB5B7 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AE62791B0C7009BB5B7 /* SignupModel.swift */; };
+		55043AEA2791CAAE009BB5B7 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AE92791CAAE009BB5B7 /* SignupViewModel.swift */; };
+		55043AEC2791CC08009BB5B7 /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AEB2791CC08009BB5B7 /* SignUpTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +53,12 @@
 		55043AC227911D4B009BB5B7 /* SignUpDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignUpDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55043AC627911D4B009BB5B7 /* SignUpDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDemoUITests.swift; sourceTree = "<group>"; };
 		55043AC827911D4B009BB5B7 /* SignUpDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		55043AD62791220B009BB5B7 /* LoginFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFieldValidation.swift; sourceTree = "<group>"; };
+		55043ADB2791A553009BB5B7 /* FieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldView.swift; sourceTree = "<group>"; };
+		55043ADD2791A99B009BB5B7 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		55043AE22791AEE7009BB5B7 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		55043AE62791B0C7009BB5B7 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
+		55043AE92791CAAE009BB5B7 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		55043AEB2791CC08009BB5B7 /* SignUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +111,11 @@
 			children = (
 				55043AA527911D48009BB5B7 /* AppDelegate.swift */,
 				55043AA727911D48009BB5B7 /* SceneDelegate.swift */,
-				55043AA927911D48009BB5B7 /* SignUpViewController.swift */,
-				55043AD62791220B009BB5B7 /* LoginFieldValidation.swift */,
+				55043AE82791B0CE009BB5B7 /* Model */,
+				55043ADA2791A526009BB5B7 /* View */,
+				55043AE52791B08D009BB5B7 /* ViewModel */,
+				55043ADF2791A9A3009BB5B7 /* Repositories */,
+				55043AE42791B055009BB5B7 /* Utilities */,
 				55043AD527911D74009BB5B7 /* resources */,
 				55043AB327911D4A009BB5B7 /* Info.plist */,
 			);
@@ -133,6 +146,64 @@
 				55043AB027911D4A009BB5B7 /* LaunchScreen.storyboard */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		55043ADA2791A526009BB5B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55043AA927911D48009BB5B7 /* SignUpViewController.swift */,
+				55043AEB2791CC08009BB5B7 /* SignUpTableViewCell.swift */,
+				55043ADB2791A553009BB5B7 /* FieldView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55043ADF2791A9A3009BB5B7 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				55043AE12791AA30009BB5B7 /* Local */,
+				55043AE02791AA26009BB5B7 /* Network */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		55043AE02791AA26009BB5B7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				55043ADD2791A99B009BB5B7 /* NetworkLayer.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		55043AE12791AA30009BB5B7 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		55043AE42791B055009BB5B7 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				55043AE22791AEE7009BB5B7 /* UIView+Extension.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		55043AE52791B08D009BB5B7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				55043AE92791CAAE009BB5B7 /* SignupViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		55043AE82791B0CE009BB5B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55043AE62791B0C7009BB5B7 /* SignupModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,10 +336,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55043AEA2791CAAE009BB5B7 /* SignupViewModel.swift in Sources */,
+				55043ADE2791A99B009BB5B7 /* NetworkLayer.swift in Sources */,
+				55043AE32791AEE7009BB5B7 /* UIView+Extension.swift in Sources */,
 				55043AAA27911D48009BB5B7 /* SignUpViewController.swift in Sources */,
-				55043AD72791220B009BB5B7 /* LoginFieldValidation.swift in Sources */,
+				55043AE72791B0C7009BB5B7 /* SignupModel.swift in Sources */,
 				55043AA627911D48009BB5B7 /* AppDelegate.swift in Sources */,
 				55043AA827911D48009BB5B7 /* SceneDelegate.swift in Sources */,
+				55043ADC2791A553009BB5B7 /* FieldView.swift in Sources */,
+				55043AEC2791CC08009BB5B7 /* SignUpTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

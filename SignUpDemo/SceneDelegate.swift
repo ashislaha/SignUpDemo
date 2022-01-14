@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		
 		let window = UIWindow(windowScene: scene)
 		self.window = window
-		let signupController = SignUpViewController()
+		let signupController = SignUpTableViewController()
 		let navigationController = UINavigationController(rootViewController: signupController)
 		window.rootViewController = navigationController
 		window.makeKeyAndVisible()
