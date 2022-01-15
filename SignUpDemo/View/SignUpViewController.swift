@@ -21,13 +21,13 @@ class SignUpTableViewController: UITableViewController {
 		tableView.estimatedRowHeight = 44
 		tableView.rowHeight = UITableView.automaticDimension
 		
-		tableView.estimatedSectionHeaderHeight = 200
-		tableView.sectionHeaderHeight = UITableView.automaticDimension
-		
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 		tableView.addGestureRecognizer(tapGesture)
 		
 		createSubmitButton()
+		
+		tableView.addSubview(activityIndicator)
+		activityIndicator.fillSuperView()
 	}
 	
 	// MARK: Private APIs and properties
@@ -49,9 +49,16 @@ class SignUpTableViewController: UITableViewController {
 		tableView.tableFooterView = button
 	}
 	
+	private let activityIndicator: UIActivityIndicatorView = {
+		let spinner = UIActivityIndicatorView()
+		spinner.style = .large
+		spinner.tintColor = .orange
+		spinner.hidesWhenStopped = true
+		return spinner
+	}()
+	
 	@objc private func signup() {
 		
-		// validation first
 		let isValid = viewModel.isAllValuesPresent()
 		
 		// TODO:- avatar retrieval logic is pending
@@ -60,21 +67,43 @@ class SignUpTableViewController: UITableViewController {
 		if isValid.0 && isAvatarAvailable {
 			
 			guard let userIdentity = viewModel.getUserIdentity() else { return }
+			let user = User(avatarUrl: URL(string: "abcd")!, identity: userIdentity)
 			
-			viewModel.signUpSubmitRequest(user: User(avatarUrl: URL(string: "abcd")!,
-													 identity: userIdentity)) { isSuccess, failureMessage in
-				if isSuccess {
-					print("User signed up successfully")
-				} else {
-					print("Error in sign up flow: ", failureMessage ?? "")
+			activityIndicator.startAnimating()
+			viewModel.signUpSubmitRequest(user: user) { [weak self] isSuccess, failureMessage in
+				DispatchQueue.main.async {
+					
+					self?.activityIndicator.stopAnimating()
+					
+					if isSuccess {
+						self?.showAlert(title: "Success",
+										message: "Sign up Successfull",
+										buttonTitle: "Okay") { _ in
+							
+							let userDetailsController = UserDetailsViewController()
+							userDetailsController.user = user
+							self?.navigationController?.pushViewController(userDetailsController, animated: true)
+							//self?.present(userDetailsController, animated: true, completion: nil)
+							
+						}
+					} else {
+						self?.showAlert(title: "Failure",
+										message: "Error in sign up flow: " + (failureMessage ?? ""),
+										buttonTitle: "Okay")
+					}
 				}
 			}
 		} else {
 			
 			if !isAvatarAvailable {
-				print("Please add an avatar")
+				showAlert(title: "Failure",
+						  message: "Please add an avatar",
+						  buttonTitle: "Okay")
+				
 			} else {
-				print("Please fill this field ", isValid.1.placeHolderText)
+				showAlert(title: "Failure",
+						  message: "Please fill \(isValid.1.placeHolderText) field",
+						  buttonTitle: "Okay")
 			}
 		}
 	}
@@ -100,6 +129,7 @@ extension SignUpTableViewController {
 	}
 }
 
+// MARK: SignUpTableViewCellDelegate
 extension SignUpTableViewController: SignUpTableViewCellDelegate {
 	
 	func fieldViewDidBeginInteracting(_ cell: SignUpTableViewCell, type: FieldType) {
@@ -108,6 +138,11 @@ extension SignUpTableViewController: SignUpTableViewCellDelegate {
 	
 	func fieldViewDidEndInteracting(_ cell: SignUpTableViewCell, type: FieldType, value: String) {
 		viewModel.userInfo[type] = value
+	}
+	
+	func fieldViewValidationError(_ cell: SignUpTableViewCell, type: FieldType) {
+		// remove stale entry (if needed)
+		viewModel.userInfo.removeValue(forKey: type)
 	}
 }
 

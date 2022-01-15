@@ -12,6 +12,8 @@ protocol SignUpTableViewCellDelegate: AnyObject {
 	func fieldViewDidBeginInteracting(_ cell: SignUpTableViewCell, type: FieldType)
 	
 	func fieldViewDidEndInteracting(_ cell: SignUpTableViewCell, type: FieldType, value: String)
+	
+	func fieldViewValidationError(_ cell: SignUpTableViewCell, type: FieldType)
 }
 
 class SignUpTableViewCell: UITableViewCell {
@@ -55,5 +57,9 @@ extension SignUpTableViewCell: FieldViewDelegate {
 	
 	func fieldViewDidEndInteracting(_ view: FieldView, type: FieldType, value: String) {
 		delegate?.fieldViewDidEndInteracting(self, type: type, value: value)
+	}
+	
+	func fieldViewValidationError(_ view: FieldView, type: FieldType) {
+		delegate?.fieldViewValidationError(self, type: type)
 	}
 }

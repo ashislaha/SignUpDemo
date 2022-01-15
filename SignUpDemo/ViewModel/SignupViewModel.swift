@@ -14,6 +14,8 @@ class SignupViewModel {
 	/// it will be used to save the field data
 	var userInfo: [FieldType: String] = [:]
 	
+	/// validate whether all mandatory fields are present
+	/// Return true if all fields are satisfying the correct value, false if not and return which first incorrect field type to notify to the user.
 	func isAllValuesPresent() -> (Bool, FieldType)  {
 		for each in fields {
 			if userInfo[each] == nil {
@@ -24,6 +26,7 @@ class SignupViewModel {
 		return (true, .none)
 	}
 	
+	/// convert userInfo data into UserIdentity before sending the "sign up" request.
 	func getUserIdentity() -> UserIdentity? {
 		guard let firstName = userInfo[.firstName],
 			  let lastName = userInfo[.lastName],
@@ -41,6 +44,10 @@ class SignupViewModel {
 							website: website)
 	}
 	
+	/// Sign up a User
+	/// - Parameters:
+	///   - user: an Instance of User
+	///   - completionHandler: Pass true / false based on User creation state. Send Error message if something went wrong.
 	func signUpSubmitRequest(user: User, completionHandler: @escaping (Bool, String?) -> Void) {
 		
 		// construct request body

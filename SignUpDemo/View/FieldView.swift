@@ -12,6 +12,8 @@ protocol FieldViewDelegate: AnyObject {
 	func fieldViewDidBeginInteracting(_ view: FieldView, type: FieldType)
 	
 	func fieldViewDidEndInteracting(_ view: FieldView, type: FieldType, value: String)
+	
+	func fieldViewValidationError(_ view: FieldView, type: FieldType)
 }
 
 class FieldView: UIView {
@@ -72,18 +74,8 @@ class FieldView: UIView {
 		textField.layer.borderColor = UIColor.gray.cgColor
 		textField.layer.borderWidth = 0.5
 	}
-	
-	/// Validate each field type whether the input text satisfies all the constraints.
-	/// - Parameters:
-	///   - type: what type of field it is.
-	///   - inputText: input text associated with type.
-	private func validateField(type: FieldType, inputText: String) -> (Bool, String?) {
 
-		// we are using a regualar expression to validate a field.
-		// https://rubular.com/r/UAwoaPM0Ji helps to understand the RegEx.
-		
-		return (true, nil)
-	}
+	private let fieldValidation = FieldValidation()
 }
 
 extension FieldView: UITextFieldDelegate {
@@ -107,13 +99,14 @@ extension FieldView: UITextFieldDelegate {
 			return
 		}
 		
-		let isValid = validateField(type: fieldType, inputText: text)
+		let isValid = fieldValidation.validateField(type: fieldType, inputText: text)
 		errorLabel.isHidden = isValid.0
 		
 		if isValid.0 {
 			delegate?.fieldViewDidEndInteracting(self, type: fieldType, value: text)
 		} else {
 			errorLabel.text = isValid.1
+			delegate?.fieldViewValidationError(self, type: fieldType)
 		}
 	}
 }
