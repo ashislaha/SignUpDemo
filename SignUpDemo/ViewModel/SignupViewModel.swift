@@ -11,6 +11,35 @@ class SignupViewModel {
 	
 	let fields: [FieldType] = [.firstName, .lastName, .email, .password, .website]
 	
+	/// it will be used to save the field data
+	var userInfo: [FieldType: String] = [:]
+	
+	func isAllValuesPresent() -> (Bool, FieldType)  {
+		for each in fields {
+			if userInfo[each] == nil {
+				return (false, each)
+			}
+		}
+		
+		return (true, .none)
+	}
+	
+	func getUserIdentity() -> UserIdentity? {
+		guard let firstName = userInfo[.firstName],
+			  let lastName = userInfo[.lastName],
+			  let email = userInfo[.email],
+			  let password = userInfo[.password],
+			  let website = userInfo[.website]
+		else {
+			return nil
+		}
+		
+		return UserIdentity(firstName: firstName,
+							lastName: lastName,
+							email: email,
+							encryptedPassword: password,
+							website: website)
+	}
 	
 	func signUpSubmitRequest(user: User, completionHandler: @escaping (Bool, String?) -> Void) {
 		

@@ -9,9 +9,9 @@ import UIKit
 
 protocol FieldViewDelegate: AnyObject {
 	
-	func fieldViewDidBeginInteracting(_ view: FieldView)
+	func fieldViewDidBeginInteracting(_ view: FieldView, type: FieldType)
 	
-	func fieldViewDidEndInteracting(_ view: FieldView)
+	func fieldViewDidEndInteracting(_ view: FieldView, type: FieldType, value: String)
 }
 
 class FieldView: UIView {
@@ -65,7 +65,8 @@ class FieldView: UIView {
 		
 		errorLabel.anchors(leading: leadingAnchor,
 						   bottom: bottomAnchor,
-						   trailing: trailingAnchor)
+						   trailing: trailingAnchor,
+						   size: .init(width: 0, height: 22))
 		
 		textField.layer.cornerRadius = 5
 		textField.layer.borderColor = UIColor.gray.cgColor
@@ -81,7 +82,7 @@ class FieldView: UIView {
 		// we are using a regualar expression to validate a field.
 		// https://rubular.com/r/UAwoaPM0Ji helps to understand the RegEx.
 		
-		return (false, nil)
+		return (true, nil)
 	}
 }
 
@@ -95,12 +96,24 @@ extension FieldView: UITextFieldDelegate {
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		
 		
-		delegate?.fieldViewDidBeginInteracting(self)
+		delegate?.fieldViewDidBeginInteracting(self, type: fieldType)
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		
-		// TODO: validate field first, show error if needed otherwise delegate if field value is good. Reset errorLabel if needed.
-		delegate?.fieldViewDidEndInteracting(self)
+		guard let text = textField.text, !text.isEmpty else {
+			errorLabel.isHidden = false
+			errorLabel.text = "Field should not be empty"
+			return
+		}
+		
+		let isValid = validateField(type: fieldType, inputText: text)
+		errorLabel.isHidden = isValid.0
+		
+		if isValid.0 {
+			delegate?.fieldViewDidEndInteracting(self, type: fieldType, value: text)
+		} else {
+			errorLabel.text = isValid.1
+		}
 	}
 }

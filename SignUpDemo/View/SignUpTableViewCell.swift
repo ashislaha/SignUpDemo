@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol SignUpTableViewCellDelegate: AnyObject {
+	
+	func fieldViewDidBeginInteracting(_ cell: SignUpTableViewCell, type: FieldType)
+	
+	func fieldViewDidEndInteracting(_ cell: SignUpTableViewCell, type: FieldType, value: String)
+}
+
 class SignUpTableViewCell: UITableViewCell {
+	
+	weak var delegate: SignUpTableViewCellDelegate?
 	
 	var fieldType: FieldType = .none {
 		didSet {
@@ -40,10 +49,11 @@ class SignUpTableViewCell: UITableViewCell {
 
 extension SignUpTableViewCell: FieldViewDelegate {
 	
-	func fieldViewDidBeginInteracting(_ view: FieldView) {
-		
+	func fieldViewDidBeginInteracting(_ view: FieldView, type: FieldType) {
+		delegate?.fieldViewDidBeginInteracting(self, type: type)
 	}
-	func fieldViewDidEndInteracting(_ view: FieldView) {
-		
+	
+	func fieldViewDidEndInteracting(_ view: FieldView, type: FieldType, value: String) {
+		delegate?.fieldViewDidEndInteracting(self, type: type, value: value)
 	}
 }
