@@ -25,17 +25,24 @@ enum FieldType {
 		case .website: return "Website"
 		}
 	}
+	
+	var isMandatory: Bool {
+		switch self {
+		case .email, .password: return true
+		default: return false
+		}
+	}
 }
 
 struct User {
-	let avatarUrl: URL
+	let avatarImageData: Data
 	let identity: UserIdentity
 }
 
 struct UserIdentity {
-	let firstName: String
-	let lastName: String
+	let firstName: String?
+	let lastName: String?
 	let email: String
 	let encryptedPassword: String
-	let website: String
+	let website: String?
 }

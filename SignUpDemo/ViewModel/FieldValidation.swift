@@ -21,6 +21,12 @@ struct FieldValidation {
 		// no validation
 		var defaultValue: (Bool, String?) = (true, nil)
 		
+		if inputText.isEmpty && !type.isMandatory {
+			// firstName, lastName, website can be an optional entry, so we can skip it if it is empty.
+			// but we must validate it if it contains some value.
+			return defaultValue
+		}
+		
 		switch type {
 		case .firstName, .lastName:
 			let name = inputText.trimmingCharacters(in: CharacterSet.whitespaces)

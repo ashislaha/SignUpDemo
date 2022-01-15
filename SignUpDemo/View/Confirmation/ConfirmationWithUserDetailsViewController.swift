@@ -1,5 +1,5 @@
 //
-//  UserDetailsViewController.swift
+//  ConfirmationWithUserDetailsViewController.swift
 //  SignUpDemo
 //
 //  Created by Ashis Laha on 15/01/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserDetailsViewController: UIViewController {
+class ConfirmationWithUserDetailsViewController: UIViewController {
 	
 	public var user: User? {
 		didSet {

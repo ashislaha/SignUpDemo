@@ -10,7 +10,7 @@ import UIKit
 protocol AvatarViewDelegate: AnyObject {
 	
 	/// delegate once a new avatar is picked.
-	func avatarPicked(_ view: AvatarView, imageURL: URL)
+	func avatarPicked(_ view: AvatarView, image: UIImage)
 	
 	/// need the parent controller to present ImagePicker
 	func parentController() -> UIViewController
@@ -105,11 +105,11 @@ extension AvatarView: UIImagePickerControllerDelegate {
 	func imagePickerController(_ picker: UIImagePickerController,
 							   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		
-		if let imageURL = info[.imageURL] as? URL {
-			delegate?.avatarPicked(self, imageURL: imageURL)
-		}
+		let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage
+		guard let image = image else { return }
 		
-		imageView.image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage
+		delegate?.avatarPicked(self, image: image)
+		imageView.image = image
 		imagePickerController.dismiss(animated: true, completion: nil)
 		label.isHidden = true
 	}

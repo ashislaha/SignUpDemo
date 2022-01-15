@@ -40,6 +40,8 @@ class FieldView: UIView {
 	
 	// MARK: Private APIs
 	
+	private let fieldValidation = FieldValidation()
+	
 	private let textField: UITextField = {
 		let textField = UITextField()
 		textField.textAlignment = .center
@@ -75,8 +77,6 @@ class FieldView: UIView {
 		textField.layer.borderColor = UIColor.gray.cgColor
 		textField.layer.borderWidth = 0.5
 	}
-
-	private let fieldValidation = FieldValidation()
 }
 
 extension FieldView: UITextFieldDelegate {
@@ -95,8 +95,11 @@ extension FieldView: UITextFieldDelegate {
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		
 		guard let text = textField.text, !text.isEmpty else {
-			errorLabel.isHidden = false
-			errorLabel.text = "Field should not be empty"
+			
+			if fieldType.isMandatory {
+				errorLabel.isHidden = false
+				errorLabel.text = "Field should not be empty"
+			}
 			return
 		}
 		

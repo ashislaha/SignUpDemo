@@ -34,6 +34,7 @@ class SignUpTableViewController: UITableViewController {
 	private let viewModel = SignupViewModel()
 	
 	private var isAvatarAvailable: Bool = false
+	private var avatarImage: UIImage?
 	
 	@objc private func dismissKeyboard() {
 		tableView.endEditing(true)
@@ -73,10 +74,13 @@ class SignUpTableViewController: UITableViewController {
 		
 		if isValid.0 && isAvatarAvailable {
 			
-			guard let userIdentity = viewModel.getUserIdentity() else { return }
-			let user = User(avatarUrl: URL(string: "abcd")!, identity: userIdentity)
+			guard let userIdentity = viewModel.getUserIdentity(),
+				  let imageData = avatarImage?.pngData()
+			else { return }
 			
+			let user = User(avatarImageData: imageData, identity: userIdentity)
 			activityIndicator.startAnimating()
+			
 			viewModel.signUpSubmitRequest(user: user) { [weak self] isSuccess, failureMessage in
 				DispatchQueue.main.async {
 					
@@ -87,7 +91,7 @@ class SignUpTableViewController: UITableViewController {
 										message: "Sign up Successfull",
 										buttonTitle: "Okay") { _ in
 							
-							let userDetailsController = UserDetailsViewController()
+							let userDetailsController = ConfirmationWithUserDetailsViewController()
 							userDetailsController.user = user
 							self?.navigationController?.pushViewController(userDetailsController, animated: true)
 							//self?.present(userDetailsController, animated: true, completion: nil)
@@ -153,10 +157,12 @@ extension SignUpTableViewController: SignUpTableViewCellDelegate {
 	}
 }
 
+// MARK: AvatarViewDelegate
 extension SignUpTableViewController: AvatarViewDelegate {
 	
-	func avatarPicked(_ view: AvatarView, imageURL: URL) {
+	func avatarPicked(_ view: AvatarView, image: UIImage) {
 		isAvatarAvailable = true
+		avatarImage = image
 	}
 	
 	func parentController() -> UIViewController {
