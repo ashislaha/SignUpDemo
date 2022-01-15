@@ -22,12 +22,25 @@ enum ResponseStatus: String {
 	case succeeded = "succeeded"
 }
 
-typealias successBlock = ((Any?) -> Void)
-typealias failureBlock = ((Any?) -> Void)
+enum NetworkEndPoint {
+	case signup
+	case signin
+	case profile
+	
+	var urlString: String {
+		switch self {
+		case .signup, .signin:
+			return "https://postman-echo.com/post"
+		case .profile:
+			return "https://postman-echo.com/get"
+		}
+	}
+}
+
+typealias successBlock = (([String: Any]) -> Void)
+typealias failureBlock = ((String) -> Void)
 
 final class NetworkLayer {
-	
-	// MARK:- "POST"/"PUT"/"DELETE"
 	
 	class func postRequest(urlString: String,
 						   bodyDict: [String: Any]? = nil,
@@ -51,13 +64,20 @@ final class NetworkLayer {
 				if let httpResponse = response as? HTTPURLResponse,
 				   (200...299).contains(httpResponse.statusCode) {
 					
-					print(data)
+					guard let dictionary = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]
+					else {
+						failureBlock?("No data available")
+						return
+					}
+					
+					successBlock?(dictionary)
+					
 				} else {
-					failureBlock?(nil)
+					failureBlock?("Failed to retrieve data - Status code is out of 2XX")
 				}
 				
 			} else {
-				failureBlock?(error)
+				failureBlock?(error?.localizedDescription ?? "Error to fetch data")
 			}
 		}
 		uploadTask.resume()

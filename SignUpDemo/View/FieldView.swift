@@ -68,7 +68,7 @@ class FieldView: UIView {
 						   trailing: trailingAnchor)
 		
 		textField.layer.cornerRadius = 5
-		textField.layer.borderColor = UIColor.lightGray.cgColor
+		textField.layer.borderColor = UIColor.gray.cgColor
 		textField.layer.borderWidth = 0.5
 	}
 	
@@ -88,6 +88,7 @@ class FieldView: UIView {
 extension FieldView: UITextFieldDelegate {
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
 		return true
 	}
 	

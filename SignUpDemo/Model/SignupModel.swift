@@ -27,8 +27,12 @@ enum FieldType {
 	}
 }
 
-struct SignupModel {
+struct User {
 	let avatarUrl: URL
+	let identity: UserIdentity
+}
+
+struct UserIdentity {
 	let firstName: String
 	let lastName: String
 	let email: String

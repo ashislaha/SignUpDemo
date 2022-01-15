@@ -13,6 +13,8 @@ class SignUpTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		title = "Profile Creation"
+		
 		tableView.separatorStyle = .none
 		tableView.register(SignUpTableViewCell.self, forCellReuseIdentifier: "cell")
 		
@@ -21,11 +23,31 @@ class SignUpTableViewController: UITableViewController {
 		
 		tableView.estimatedSectionHeaderHeight = 200
 		tableView.sectionHeaderHeight = UITableView.automaticDimension
+		
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+		tableView.addGestureRecognizer(tapGesture)
+		
+		viewModel.signUpSubmitRequest(user: User(avatarUrl: URL(string: "abcd")!,
+												 identity: UserIdentity(firstName: "ashis",
+																		lastName: "laha",
+																		email: "email",
+																		encryptedPassword: "password",
+																		website: "postman"))) { isSuccess, failureMessage in
+			if isSuccess {
+				print("User signed up successfully")
+			} else {
+				print("Error in sign up flow: ", failureMessage ?? "")
+			}
+		}
 	}
 	
 	// MARK: Private APIs and properties
 	
 	private let viewModel = SignupViewModel()
+	
+	@objc private func dismissKeyboard() {
+		tableView.endEditing(true)
+	}
 	
 }
 

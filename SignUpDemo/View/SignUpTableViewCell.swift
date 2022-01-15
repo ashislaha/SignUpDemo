@@ -19,6 +19,7 @@ class SignUpTableViewCell: UITableViewCell {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		
 		viewSetup()
+		selectionStyle = .none
 	}
 	
 	required init?(coder: NSCoder) {
