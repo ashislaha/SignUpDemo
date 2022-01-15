@@ -54,7 +54,7 @@ struct FieldValidation {
 			let passwordRegx = "^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{5}$"
 			let passwordCheck = NSPredicate(format: "SELF MATCHES %@", passwordRegx)
 			if !passwordCheck.evaluate(with: password) {
-				defaultValue = (false, "1 (uppercase + lowercase + digit + symbol), 5 chars")
+				defaultValue = (false, "5 chars -> 1 (upper, lower, digit, symbol)")
 			}
 			break
 		case .none:

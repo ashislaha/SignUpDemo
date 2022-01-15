@@ -49,6 +49,7 @@ class FieldView: UIView {
 	private let errorLabel: UILabel = {
 		let label = UILabel()
 		label.textAlignment = .center
+		label.numberOfLines = 0
 		label.textColor = .red
 		label.isHidden = true
 		return label

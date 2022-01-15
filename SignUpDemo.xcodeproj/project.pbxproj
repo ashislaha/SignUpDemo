@@ -24,6 +24,7 @@
 		55043AEE2792ACBD009BB5B7 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AED2792ACBD009BB5B7 /* UIViewController+Extension.swift */; };
 		55043AF02792B1BB009BB5B7 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AEF2792B1BB009BB5B7 /* UserDetailsViewController.swift */; };
 		55043AF32792B45E009BB5B7 /* FieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AF22792B45E009BB5B7 /* FieldValidation.swift */; };
+		55043AF527930203009BB5B7 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55043AF427930203009BB5B7 /* AvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		55043AED2792ACBD009BB5B7 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		55043AEF2792B1BB009BB5B7 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		55043AF22792B45E009BB5B7 /* FieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValidation.swift; sourceTree = "<group>"; };
+		55043AF427930203009BB5B7 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,9 +160,10 @@
 			isa = PBXGroup;
 			children = (
 				55043AA927911D48009BB5B7 /* SignUpViewController.swift */,
-				55043AEF2792B1BB009BB5B7 /* UserDetailsViewController.swift */,
 				55043AEB2791CC08009BB5B7 /* SignUpTableViewCell.swift */,
+				55043AF427930203009BB5B7 /* AvatarView.swift */,
 				55043ADB2791A553009BB5B7 /* FieldView.swift */,
+				55043AEF2792B1BB009BB5B7 /* UserDetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				55043ADE2791A99B009BB5B7 /* NetworkLayer.swift in Sources */,
 				55043AE32791AEE7009BB5B7 /* UIView+Extension.swift in Sources */,
 				55043AAA27911D48009BB5B7 /* SignUpViewController.swift in Sources */,
+				55043AF527930203009BB5B7 /* AvatarView.swift in Sources */,
 				55043AE72791B0C7009BB5B7 /* SignupModel.swift in Sources */,
 				55043AA627911D48009BB5B7 /* AppDelegate.swift in Sources */,
 				55043AA827911D48009BB5B7 /* SceneDelegate.swift in Sources */,

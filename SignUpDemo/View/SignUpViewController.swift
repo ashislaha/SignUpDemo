@@ -9,7 +9,6 @@ import UIKit
 
 class SignUpTableViewController: UITableViewController {
 
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -17,25 +16,36 @@ class SignUpTableViewController: UITableViewController {
 		
 		tableView.separatorStyle = .none
 		tableView.register(SignUpTableViewCell.self, forCellReuseIdentifier: "cell")
-		
 		tableView.estimatedRowHeight = 44
 		tableView.rowHeight = UITableView.automaticDimension
 		
-		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-		tableView.addGestureRecognizer(tapGesture)
-		
+		createAvatarView()
 		createSubmitButton()
 		
-		tableView.addSubview(activityIndicator)
-		activityIndicator.fillSuperView()
+		view.addSubview(activityIndicator)
+		activityIndicator.anchors(centerX: view.centerXAnchor, centerY: view.centerYAnchor)
+		
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+		tableView.addGestureRecognizer(tapGesture)
 	}
 	
 	// MARK: Private APIs and properties
 	
 	private let viewModel = SignupViewModel()
 	
+	private var isAvatarAvailable: Bool = false
+	
 	@objc private func dismissKeyboard() {
 		tableView.endEditing(true)
+	}
+	
+	private func createAvatarView() {
+		let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 160))
+		let avatarView = AvatarView()
+		headerView.addSubview(avatarView)
+		avatarView.fillSuperView()
+		avatarView.delegate = self
+		tableView.tableHeaderView = headerView
 	}
 	
 	private func createSubmitButton() {
@@ -60,9 +70,6 @@ class SignUpTableViewController: UITableViewController {
 	@objc private func signup() {
 		
 		let isValid = viewModel.isAllValuesPresent()
-		
-		// TODO:- avatar retrieval logic is pending
-		let isAvatarAvailable = true
 		
 		if isValid.0 && isAvatarAvailable {
 			
@@ -146,3 +153,13 @@ extension SignUpTableViewController: SignUpTableViewCellDelegate {
 	}
 }
 
+extension SignUpTableViewController: AvatarViewDelegate {
+	
+	func avatarPicked(_ view: AvatarView, imageURL: URL) {
+		isAvatarAvailable = true
+	}
+	
+	func parentController() -> UIViewController {
+		return self
+	}
+}
