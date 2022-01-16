@@ -13,7 +13,7 @@ class ConfirmationWithUserDetailsViewController: UIViewController {
 		didSet {
 			
 			if let user = user {
-				title = "Hello, \(user.identity.firstName)"
+				title = "Hello, \(user.identity.firstName ?? "")"
 			}
 		}
 	}
@@ -21,6 +21,6 @@ class ConfirmationWithUserDetailsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		view.backgroundColor = .green
+		view.backgroundColor = .white
 	}
 }

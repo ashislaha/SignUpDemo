@@ -119,9 +119,9 @@
 			children = (
 				55043AA527911D48009BB5B7 /* AppDelegate.swift */,
 				55043AA727911D48009BB5B7 /* SceneDelegate.swift */,
-				55043AE82791B0CE009BB5B7 /* Model */,
-				55043ADA2791A526009BB5B7 /* View */,
-				55043AE52791B08D009BB5B7 /* ViewModel */,
+				55043AF627932813009BB5B7 /* Sign up */,
+				55043AF72793288E009BB5B7 /* Confirmation */,
+				55043AF8279328F6009BB5B7 /* Reusable Views */,
 				55043ADF2791A9A3009BB5B7 /* Repositories */,
 				55043AE42791B055009BB5B7 /* Utilities */,
 				55043AD527911D74009BB5B7 /* resources */,
@@ -154,16 +154,6 @@
 				55043AB027911D4A009BB5B7 /* LaunchScreen.storyboard */,
 			);
 			path = resources;
-			sourceTree = "<group>";
-		};
-		55043ADA2791A526009BB5B7 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				55043AF627932813009BB5B7 /* Sign up */,
-				55043AF8279328F6009BB5B7 /* Reusable */,
-				55043AF72793288E009BB5B7 /* Confirmation */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		55043ADF2791A9A3009BB5B7 /* Repositories */ = {
@@ -203,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				55043AE92791CAAE009BB5B7 /* SignupViewModel.swift */,
-				55043AF22792B45E009BB5B7 /* FieldValidation.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -219,8 +208,9 @@
 		55043AF627932813009BB5B7 /* Sign up */ = {
 			isa = PBXGroup;
 			children = (
-				55043AA927911D48009BB5B7 /* SignUpViewController.swift */,
-				55043AEB2791CC08009BB5B7 /* SignUpTableViewCell.swift */,
+				55043AE82791B0CE009BB5B7 /* Model */,
+				55043AE52791B08D009BB5B7 /* ViewModel */,
+				55043AF92793B824009BB5B7 /* view */,
 			);
 			path = "Sign up";
 			sourceTree = "<group>";
@@ -233,13 +223,39 @@
 			path = Confirmation;
 			sourceTree = "<group>";
 		};
-		55043AF8279328F6009BB5B7 /* Reusable */ = {
+		55043AF8279328F6009BB5B7 /* Reusable Views */ = {
+			isa = PBXGroup;
+			children = (
+				55043AFA2793B8C1009BB5B7 /* Avatar View */,
+				55043AFB2793B8CC009BB5B7 /* Field View */,
+			);
+			path = "Reusable Views";
+			sourceTree = "<group>";
+		};
+		55043AF92793B824009BB5B7 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				55043AA927911D48009BB5B7 /* SignUpViewController.swift */,
+				55043AEB2791CC08009BB5B7 /* SignUpTableViewCell.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		55043AFA2793B8C1009BB5B7 /* Avatar View */ = {
 			isa = PBXGroup;
 			children = (
 				55043AF427930203009BB5B7 /* AvatarView.swift */,
-				55043ADB2791A553009BB5B7 /* FieldView.swift */,
 			);
-			path = Reusable;
+			path = "Avatar View";
+			sourceTree = "<group>";
+		};
+		55043AFB2793B8CC009BB5B7 /* Field View */ = {
+			isa = PBXGroup;
+			children = (
+				55043ADB2791A553009BB5B7 /* FieldView.swift */,
+				55043AF22792B45E009BB5B7 /* FieldValidation.swift */,
+			);
+			path = "Field View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

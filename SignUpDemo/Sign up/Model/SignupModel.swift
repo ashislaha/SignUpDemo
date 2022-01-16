@@ -34,6 +34,7 @@ enum FieldType {
 	}
 }
 
+/// Define an User
 struct User {
 	let avatarImageData: Data
 	let identity: UserIdentity
