@@ -41,7 +41,7 @@ class SignUpTableViewController: UITableViewController {
 	}
 	
 	private func createAvatarView() {
-		let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 160))
+		let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 150))
 		let avatarView = AvatarView()
 		headerView.addSubview(avatarView)
 		avatarView.fillSuperView()
@@ -63,7 +63,7 @@ class SignUpTableViewController: UITableViewController {
 	private let activityIndicator: UIActivityIndicatorView = {
 		let spinner = UIActivityIndicatorView()
 		spinner.style = .large
-		spinner.tintColor = .orange
+		spinner.color = .orange
 		spinner.hidesWhenStopped = true
 		return spinner
 	}()

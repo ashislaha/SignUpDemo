@@ -63,20 +63,16 @@ class AvatarView: UIView, UINavigationControllerDelegate {
 		addGestureRecognizer(tapGesture)
 		
 		imageView.addSubview(label)
-		label.anchors(top: imageView.topAnchor,
-					  leading: imageView.leadingAnchor,
-					  bottom: imageView.bottomAnchor,
-					  trailing: imageView.trailingAnchor,
-					  padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+		label.fillSuperView(edgeInset: .init(top: 0, left: 16, bottom: 0, right: 16))
 	}
 	
 	@objc private func pickImage() {
 		
 		imagePickerController.delegate = self
 		
-		let alertController = UIAlertController(title: "Choose your avatar", message: "Source", preferredStyle: .alert)
+		let alertController = UIAlertController(title: "Capture your avatar", message: "Source", preferredStyle: .alert)
 		
-		let galleryAction = UIAlertAction(title: "Photo Library", style: .default) { alertAction in
+		let galleryAction = UIAlertAction(title: "Photo Gallery", style: .default) { alertAction in
 			self.imagePickerController.sourceType = .photoLibrary
 			self.delegate?.parentController().present(self.imagePickerController, animated: true, completion: nil)
 		}
