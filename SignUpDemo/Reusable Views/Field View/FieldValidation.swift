@@ -40,7 +40,7 @@ struct FieldValidation {
 			let emailRegx = "^[A-Z0-9a-z._%+]+@[A-Za-z0-9.]+\\.[A-Za-z]{2,4}$"
 			let emailCheck = NSPredicate(format: "SELF MATCHES %@", emailRegx)
 			if !emailCheck.evaluate(with: email) {
-				defaultValue = (false, "<name>@<host>.<domain>")
+				defaultValue = (false, "<name>@<domain>")
 			}
 			
 		case .website:

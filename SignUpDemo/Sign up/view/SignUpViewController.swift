@@ -31,7 +31,7 @@ class SignUpTableViewController: UITableViewController {
 	
 	// MARK: Private APIs and properties
 	
-	private let viewModel = SignupViewModel()
+	private var viewModel = SignupViewModel(signUpService: SignUpServiceProvider())
 	
 	private var isAvatarAvailable: Bool = false
 	private var avatarImage: UIImage?
@@ -81,7 +81,7 @@ class SignUpTableViewController: UITableViewController {
 			let user = User(avatarImageData: imageData, identity: userIdentity)
 			activityIndicator.startAnimating()
 			
-			viewModel.signUpSubmitRequest(user: user) { [weak self] isSuccess, failureMessage in
+			viewModel.signUpServiceProvider.signUpSubmitRequest(user: user) { [weak self] isSuccess, failureMessage in
 				DispatchQueue.main.async {
 					
 					self?.activityIndicator.stopAnimating()
