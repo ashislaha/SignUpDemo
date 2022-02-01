@@ -15,13 +15,6 @@ enum NetworkRequestType: String {
 	case DELETE = "DELETE"
 }
 
-enum ResponseStatus: String {
-	case notStarted = "notStarted"
-	case running = "running"
-	case failed = "failed"
-	case succeeded = "succeeded"
-}
-
 enum NetworkEndPoint {
 	case signup
 	case signin

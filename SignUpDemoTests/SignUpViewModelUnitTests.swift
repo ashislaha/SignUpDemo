@@ -112,7 +112,9 @@ class SignUpViewModelUnitTests: XCTestCase {
 	}
 	
 	func test_validate_signupviewModel_signupservice_signup_submit_success() {
-		let user = User(avatarImageData: Data(),
+		
+		// stub object
+		let userStub = User(avatarImageData: Data(),
 						identity: UserIdentity(firstName: "Ashis",
 											   lastName: "Laha",
 											   email: "aslaha@microsoft.com",
@@ -122,7 +124,7 @@ class SignUpViewModelUnitTests: XCTestCase {
 		let expection = self.expectation(description: "signup_submit_success")
 		
 		// using Mock sign up service provider
-		viewModel.signUpServiceProvider.signUpSubmitRequest(user: user) { isSuccess, errorString in
+		viewModel.signUpServiceProvider.signUpSubmitRequest(user: userStub) { isSuccess, errorString in
 			XCTAssertTrue(isSuccess)
 			XCTAssertNil(errorString)
 			expection.fulfill()
@@ -134,7 +136,7 @@ class SignUpViewModelUnitTests: XCTestCase {
 	func test_validate_signupviewModel_signupservice_signup_submit_failure() {
 		
 		// email is empty
-		let user = User(avatarImageData: Data(),
+		let userStub = User(avatarImageData: Data(),
 						identity: UserIdentity(firstName: "Ashis",
 											   lastName: "Laha",
 											   email: "",
@@ -144,7 +146,7 @@ class SignUpViewModelUnitTests: XCTestCase {
 		let expection = self.expectation(description: "signup_submit_failure")
 		
 		// using Mock sign up service provider
-		viewModel.signUpServiceProvider.signUpSubmitRequest(user: user) { isSuccess, errorString in
+		viewModel.signUpServiceProvider.signUpSubmitRequest(user: userStub) { isSuccess, errorString in
 			XCTAssertFalse(isSuccess)
 			XCTAssertNotNil(errorString)
 			XCTAssertEqual(errorString!, "Email or Password is empty")

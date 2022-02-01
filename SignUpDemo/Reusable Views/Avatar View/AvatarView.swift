@@ -76,15 +76,19 @@ class AvatarView: UIView, UINavigationControllerDelegate {
 			self.imagePickerController.sourceType = .photoLibrary
 			self.delegate?.parentController().present(self.imagePickerController, animated: true, completion: nil)
 		}
+		alertController.addAction(galleryAction)
 		
-		let cameraAction = UIAlertAction(title: "Camera", style: .default) {  alertAction in
-			self.imagePickerController.sourceType = .camera
-			self.delegate?.parentController().present(self.imagePickerController, animated: true, completion: nil)
+		if UIImagePickerController.isSourceTypeAvailable(.camera) {
+			let cameraAction = UIAlertAction(title: "Camera", style: .default) {  alertAction in
+				self.imagePickerController.sourceType = .camera
+				self.delegate?.parentController().present(self.imagePickerController, animated: true, completion: nil)
+			}
+			alertController.addAction(cameraAction)
 		}
 		
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		alertController.addAction(cancelAction)
 		
-		[galleryAction, cameraAction, cancelAction].forEach { alertController.addAction($0) }
 		delegate?.parentController().present(alertController, animated: true, completion: nil)
 	}
 	

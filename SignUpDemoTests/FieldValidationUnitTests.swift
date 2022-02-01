@@ -9,7 +9,7 @@ import XCTest
 @testable import SignUpDemo
 
 class FieldValidationUnitTests: XCTestCase {
-
+	
 	func test_validate_field_with_invalid_user_first_name() {
 		
 		let fieldValidation = FieldValidation()

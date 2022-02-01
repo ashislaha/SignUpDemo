@@ -87,8 +87,6 @@ extension FieldView: UITextFieldDelegate {
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
-		
-		
 		delegate?.fieldViewDidBeginInteracting(self, type: fieldType)
 	}
 	
